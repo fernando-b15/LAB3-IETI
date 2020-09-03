@@ -27,6 +27,8 @@ React project using Material-UI library.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lab3ieti.herokuapp.com/)
 
+[![Azure](https://aka.ms/deploytoazurebutton)](https://ietilabv3.z21.web.core.windows.net/)
+
 ## Available Scripts
 
 In the project directory, you can run:
