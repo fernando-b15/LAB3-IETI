@@ -22,6 +22,9 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import CardTask from "./CardTask";
 import { useHistory } from "react-router-dom";
+import Modal from 'react-awesome-modal';
+import {FilterTask} from './FilterTask';
+
 
 
 
@@ -73,6 +76,20 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const filter = (lista) => {
+	if(localStorage.getItem("filtroName") === null && localStorage.getItem("filtroEstado") === null){
+		return lista;
+	}
+	else{	
+		const filtro=[];
+		lista.map((task) => {
+			if(localStorage.getItem("filtroName") === lista.responsable.name && localStorage.getItem("filtroEstado") === lista.responsable.estado){
+				filtro.push(task);
+			}	
+		});
+		return filtro;
+	}	
+  };
 
   const drawer = (
 	<div>
@@ -82,7 +99,7 @@ function ResponsiveDrawer(props) {
 			<List>
                 <ListItem>
                   <ListItemText
-                    primary="Administrator"
+                    primary={localStorage.getItem("name")}
                   />
                 </ListItem>,
 				 <ListItem>
@@ -109,9 +126,11 @@ function ResponsiveDrawer(props) {
  
   const container = window !== undefined ? () => window().document.body : undefined;
 
-  const notificaciones=localStorage.getItem("items") === null ? ([]):JSON.parse(localStorage.getItem("items"));
+  const notificaciones=localStorage.getItem("items") === null ? ([]):filter(JSON.parse(localStorage.getItem("items")));
   
-  console.log(notificaciones);
+
+
+
 
   return (
     <div className={classes.root}>
@@ -166,8 +185,9 @@ function ResponsiveDrawer(props) {
 		  <div className={classes.toolbar} />
 			<CardTask task={notificaciones} /> 
 			<Fab color="primary" aria-label="add" href="/newtask" style={{position: "fixed",bottom: "30px",right: "30px" }}>
-			  <AddIcon />
+			<AddIcon />
 			</Fab>	
+			<FilterTask  />
 	  </main>	
 	
     </div>
