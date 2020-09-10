@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Home} from './components/Home'
+import {NewTask} from './components/NewTask';
 import {Login} from './components/Login';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import  { Redirect } from 'react-router-dom'
 
 class App extends Component {
 	constructor(props) {
@@ -15,18 +17,32 @@ class App extends Component {
 		
 	}
 	render(){
+		const home = () => <Home />;
+		const newtask = () => <NewTask />;
+		const login = () => < Login logged={this.handleState} />;
 		console.log('entro a render');
 		console.log(this.state.isLoggedIn);
 		if (this.state.isLoggedIn) {
 			console.log('llllllllllleego aqui zzzzzzzzzzzzzzzzzzzzzzzzz33333333333333333333');
 			return(			
-				< Home /> 
+				<Router>
+				  <div className="App">     
+					<Redirect to="/home" />					
+				  </div>
+				</Router>
+
 			);	
 		}
 		else{
 			console.log('llllllllllleego aqui zzzzzzzzzzzzzzzzzzzzzzzzz2222222222222222');
 			return(
-				< Login logged={this.handleState} />
+				<Router>
+				  <div className="App">   
+					<Route exact path="/" component={login} /> 
+					<Route exact path="/newtask" component={newtask} />  
+					<Route exact path="/home" component={home} />					
+				  </div>
+				</Router>
 			);			
 		} 
     }

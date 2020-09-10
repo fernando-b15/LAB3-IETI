@@ -18,6 +18,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import CardTask from "./CardTask";
 
 
@@ -102,24 +104,10 @@ function ResponsiveDrawer(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  const notificaciones=([{
-			"tarea": "Arreglos Front-End",       
-			"status": "Ready",
-			"dueDate": new Date(),
-			"name": "Fernando Barrera",
-		},
-		{
-			"tarea": "Arreglos Back-End",       
-			"status": "Ready",
-			"dueDate": new Date(),
-			"name": "Fernando Barrera",
-		},
-		{
-			"tarea": "Arreglos UX",       
-			"status": "Ready",
-			"dueDate": new Date(),
-			"name": "Fernando Barrera",
-		}]);
+
+  const notificaciones=localStorage.getItem("items") === null ? ([]):JSON.parse(localStorage.getItem("items"));
+  
+  console.log(notificaciones);
 
   return (
     <div className={classes.root}>
@@ -171,9 +159,15 @@ function ResponsiveDrawer(props) {
         </Hidden>
       </nav>
 	  <main className={classes.content}>
-		<CardTask task={notificaciones} /> 
-	  </main>		
+		  <div className={classes.toolbar} />
+			<CardTask task={notificaciones} /> 
+			<Fab color="primary" aria-label="add" href="/newtask" style={{position: "fixed",bottom: "30px",right: "30px" }}>
+			  <AddIcon />
+			</Fab>	
+	  </main>	
+	
     </div>
+	
   );
 }
 

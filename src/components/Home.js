@@ -5,7 +5,8 @@ export class Home extends React.Component{
 	constructor(props) {
 		super(props);
 	}
-	render(){
+	render(){	  
+
 		
 		return(
 			<ResponsiveDrawer/>

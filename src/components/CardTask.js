@@ -15,10 +15,9 @@ export default class CardTask extends React.Component {
         const cardTask = this.props.task.map((task, i) => {
             return (
                 <Card
-                    key={'Tarea ' + i}
-                    description={task.tarea}
-                    name={task.name}
-                    status={task.status}
+                    descripcion={task.descripcion}
+                    name={task.responsable.name}
+                    status={task.estado}
                     dueDate={task.dueDate} 
                 />
             );

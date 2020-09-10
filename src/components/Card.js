@@ -29,11 +29,11 @@ export default function OutlinedCard(props) {
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {props.tarea}
-        </Typography>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h3" component="h2">
           {props.status} 
+        </Typography>
+		  <Typography className={classes.title} variant="h5" component="h2"  gutterBottom>
+          {props.descripcion}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           {props.name} - {new Date(props.dueDate).toString()}

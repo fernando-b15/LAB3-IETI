@@ -12,6 +12,7 @@ import './Login.css'
 import logo from '../logo.svg';
 import '../App.css';
 import Modal from 'react-awesome-modal';
+import Link from '@material-ui/core/Link';
 
 export class Login extends React.Component{
 	constructor(props) {
@@ -90,6 +91,7 @@ export class Login extends React.Component{
                                 Sign in
                             </Button>
                         </form>
+						<Link href="./newTask" variant="body2"> Task </Link>
                     </Paper>
                 </main>
             </React.Fragment>
@@ -102,6 +104,10 @@ export class Login extends React.Component{
 			console.log(this.state);
 			localStorage.setItem("isLoggedIn", true);
 			this.props.logged();
+			setTimeout(() => {
+				window.location.href = "/home";
+			}, 1000);
+
 		}
 		else{
 			this.setState({visible: true});
