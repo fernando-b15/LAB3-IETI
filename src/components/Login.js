@@ -21,8 +21,6 @@ export class Login extends React.Component{
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleMail = this.handleMail.bind(this);
 		this.handlePass = this.handlePass.bind(this);
-		localStorage.setItem("user", "admin@hotmail.com");
-		localStorage.setItem("password", "admin");
 	}
 	openModal() {
         this.setState({
@@ -91,7 +89,7 @@ export class Login extends React.Component{
                                 Sign in
                             </Button>
                         </form>
-						<Link href="./newTask" variant="body2"> Task </Link>
+						<Link href="./userprofile" variant="body2"> Sing-In </Link>
                     </Paper>
                 </main>
             </React.Fragment>
