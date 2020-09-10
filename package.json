@@ -15,6 +15,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "DatePicker": "^2.0.0",
+    "clear": "^0.1.0",
     "express": "^4.17.1",
     "moment": "^2.22.2",
     "react": "^16.13.1",
@@ -22,7 +23,7 @@
     "react-datepicker": "^1.6.0",
     "react-dom": "^16.13.1",
     "react-moment": "^0.7.9",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3"
   },
   "scripts": {

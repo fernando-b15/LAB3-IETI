@@ -21,10 +21,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import CardTask from "./CardTask";
+import { useHistory } from "react-router-dom";
 
 
 
 const drawerWidth = 240;
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +68,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  let history = useHistory();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -93,7 +97,7 @@ function ResponsiveDrawer(props) {
 	  <div>
       <List>
         {['Logout'].map((text, index) => (
-          <ListItem button key={text}>
+         <ListItem button key={text} onClick={() =>  history.push("/")}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -102,7 +106,7 @@ function ResponsiveDrawer(props) {
 	  </div>
     </div>
   );
-
+ 
   const container = window !== undefined ? () => window().document.body : undefined;
 
   const notificaciones=localStorage.getItem("items") === null ? ([]):JSON.parse(localStorage.getItem("items"));
