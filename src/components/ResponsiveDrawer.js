@@ -24,7 +24,7 @@ import CardTask from "./CardTask";
 import { useHistory } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import {FilterTask} from './FilterTask';
-
+import moment from "moment";
 
 
 
@@ -76,14 +76,20 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  
+  const vista = () => {
+    setMobileOpen(!mobileOpen);
+  };
   const filter = (lista) => {
-	if(localStorage.getItem("filtroName") === null && localStorage.getItem("filtroEstado") === null){
+	if(localStorage.getItem("filtroName") === null && localStorage.getItem("filtroEstado") === null && localStorage.getItem("filtroFecha") === null ){
 		return lista;
 	}
 	else{	
 		const filtro=[];
 		lista.map((task) => {
-			if(localStorage.getItem("filtroName") === lista.responsable.name && localStorage.getItem("filtroEstado") === lista.responsable.estado){
+			console.log(moment(localStorage.getItem("filtroFecha")).format("dd-MM-yyyy"));
+			console.log(moment(task.dueDate).format("dd-MM-yyyy"));
+			if(localStorage.getItem("filtroName") === task.responsable.name && localStorage.getItem("filtroEstado") === task.estado &&  moment(localStorage.getItem("filtroFecha")).format("dd-MM-yyyy") === moment(task.dueDate).format("dd-MM-yyyy") ){
 				filtro.push(task);
 			}	
 		});
@@ -128,7 +134,7 @@ function ResponsiveDrawer(props) {
 
   const notificaciones=localStorage.getItem("items") === null ? ([]):filter(JSON.parse(localStorage.getItem("items")));
   
-
+  const res = true;
 
 
 
@@ -187,7 +193,7 @@ function ResponsiveDrawer(props) {
 			<Fab color="primary" aria-label="add" href="/newtask" style={{position: "fixed",bottom: "30px",right: "30px" }}>
 			<AddIcon />
 			</Fab>	
-			<FilterTask  />
+			<FilterTask/>
 	  </main>	
 	
     </div>

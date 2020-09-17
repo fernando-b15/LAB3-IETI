@@ -9,9 +9,12 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import "./style.css"
-import DatePicker from 'react-datepicker';
+import "./style.css";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {MuiPickersUtilsProvider,KeyboardDatePicker} from "@material-ui/pickers";
 import moment from "moment";
+
 
 
 
@@ -47,16 +50,18 @@ export class NewTask extends React.Component{
 							<InputLabel>Status (Ready/In Progress/Completed)</InputLabel>
 							<Input id="Responsable" name="estado" autoComplete="estado"  value={this.state.estado} onChange={this.handleChangeStatus}/>
 						</FormControl>
-						<div>
-							<DatePicker
-								id="myDatePicker"
-								name="fecha"
-								width="100%"
-								selected={this.state.dueDate}
-								placeholderText="Due date"
-								onChange={this.handleChangeDueDate}>
-							</DatePicker>
-						</div>	
+						<MuiPickersUtilsProvider utils={DateFnsUtils}> 
+                        <KeyboardDatePicker
+                            margin="normal"
+                            id="date-picker-dialog"
+                            label="Date picker dialog"
+                            format="MM/dd/yyyy"
+                            value={this.state.dueDate1}
+                            onChange={this.handleChangeDueDate}
+                            fullWidth
+                            KeyboardButtonProps={{"aria-label": "change date"}}
+                        />
+						</MuiPickersUtilsProvider>	
 					   
 						<br/>
 						<br/>
@@ -83,10 +88,12 @@ export class NewTask extends React.Component{
     };
     
     handleChangeDueDate(date){
+		console.log(date);
         this.setState({dueDate: date });
     };
 	handleSubmit(e){		
-		e.preventDefault();				
+		e.preventDefault();
+		console.log(this.state);		
 		if (localStorage.getItem("items") === null) {
 			  var items = [this.state];
 			  console.log(items);
@@ -98,5 +105,6 @@ export class NewTask extends React.Component{
           localStorage.setItem("items", JSON.stringify(items));
         }
 		window.location.href = "/home";
+
 	}
 }

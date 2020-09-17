@@ -17,7 +17,7 @@ export class UserProfile extends React.Component{
         this.handleChangeName=this.handleChangeName.bind(this);
         this.handleChangeEmail=this.handleChangeEmail.bind(this);
         this.handleChangePassword=this.handleChangePassword.bind(this);
-		 this.handleChangerePassword=this.handleChangerePassword.bind(this);
+		this.handleChangerePassword=this.handleChangerePassword.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		console.log(this.state);
 	}
@@ -44,13 +44,13 @@ export class UserProfile extends React.Component{
                         </FormControl>
 						<FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="repassword">Confirm password</InputLabel>
-                                <Input name="repassword" type="repassword" id="repassword" value={this.state.repassword} onChange={this.handleChangerePassword} autoComplete="current-password" autoFocus/>
+                                <Input name="repassword" type="password" id="repassword" value={this.state.repassword} onChange={this.handleChangerePassword} autoComplete="current-password" autoFocus/>
                         </FormControl>
 					   
 						<br/>
 						<br/>
 						<Button type="submit" variant="contained" color="primary">
-							Add
+							Update
 						</Button>
 						<br/>
 						<Link href="/" variant="body2"> back </Link>
@@ -84,7 +84,7 @@ export class UserProfile extends React.Component{
 				  localStorage.setItem("user", this.state.mail);
 				  localStorage.setItem("name", this.state.name);
 				  localStorage.setItem("password", this.state.password);
-				  window.location.href = "/userprofile";
+				  window.location.href = "/";
 			  }
 			  else{
 				  alert("passwords no coinciden");

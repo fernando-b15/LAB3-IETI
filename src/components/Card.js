@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import ResponsiveDrawer from './ResponsiveDrawer';
+import moment from "moment";
 
 
 const useStyles = makeStyles({
@@ -36,7 +37,7 @@ export default function OutlinedCard(props) {
           {props.descripcion}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          {props.name} - {new Date(props.dueDate).toString()}
+          {props.name} - {moment(props.dueDate).format("dd-MM-yyyy")}
         </Typography>
       </CardContent>
     </Card>
