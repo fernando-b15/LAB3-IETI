@@ -13,6 +13,7 @@ import logo from '../logo.svg';
 import '../App.css';
 import Modal from 'react-awesome-modal';
 import Link from '@material-ui/core/Link';
+import axios from "axios";
 
 export class Login extends React.Component{
 	constructor(props) {
@@ -98,18 +99,32 @@ export class Login extends React.Component{
 	handleSubmit(e){
 		console.log('llllllllllleego aqui zzzzzzzzzzzzzzzzzzzzzzzzz');
         e.preventDefault();
-		if(localStorage.getItem("user")===this.state.mail && localStorage.getItem("password")===this.state.pass){
-			console.log(this.state);
-			localStorage.setItem("isLoggedIn", true);
-			this.props.logged();
-			setTimeout(() => {
-				window.location.href = "/home";
-			}, 1000);
+		var user = this.state.mail;
+		var pass = this.state.pass;
+		console.log(user);
+		console.log(pass);
+		axios.post('http://192.168.214.124:8080/users/login', {
+             email: user,
+             password: pass
+		})
+		.then(function (response)
+		{
+			let	servicesHope = axios.get('http://192.168.255.122:8080/registros/')
+					.then(function (response) {
+						localStorage.setItem("register",JSON.stringify(response.data));
+						localStorage.setItem("user",user);
+						window.location.href = "/home";
+						
+					})
+					.catch(function (error) { 
+						console.log(error);
+					});
+			
+			
 
-		}
-		else{
-			this.setState({visible: true});
-		}	
+		})
+		.catch(function (error)
+		{ alert("Error de autenticacion") });		
     }
 	handleMail(e) {
        this.setState({mail: e.target.value});

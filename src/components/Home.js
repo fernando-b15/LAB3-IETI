@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ResponsiveDrawer from './ResponsiveDrawer';
+import {Chat} from './Chat';
 
 export class Home extends React.Component{
 	constructor(props) {
@@ -7,9 +8,9 @@ export class Home extends React.Component{
 	}
 	render(){	  
 
-		
+		const myComponent = <Chat/>
 		return(
-			<ResponsiveDrawer/>
+			<ResponsiveDrawer childComponent={myComponent}/>
 		);
 	}
 }

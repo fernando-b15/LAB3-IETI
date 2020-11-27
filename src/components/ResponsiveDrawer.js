@@ -25,6 +25,8 @@ import { useHistory } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import {FilterTask} from './FilterTask';
 import moment from "moment";
+import ListIcon from '@material-ui/icons/List';
+
 
 
 
@@ -35,17 +37,20 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+	background: '#212F3C',
+
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
-      flexShrink: 0,
+      flexShrink: 0, 
     },
   },
   appBar: {
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+	  background: '#EDBB99',
     },
   },
   menuButton: {
@@ -58,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
+	background: '#EDBB99',
   },
   content: {
     flexGrow: 1,
@@ -103,11 +109,6 @@ function ResponsiveDrawer(props) {
 	   <div style={{alignItems:'center',justifyContent:'center'}}>
 	   <AccountCircleIcon style={{ fontSize: 50 }} />	
 			<List>
-                <ListItem>
-                  <ListItemText
-                    primary={localStorage.getItem("name")}
-                  />
-                </ListItem>,
 				 <ListItem>
                   <ListItemText
                     primary={localStorage.getItem("user")}
@@ -118,6 +119,18 @@ function ResponsiveDrawer(props) {
       </div>
 	  <Divider />
 	  <div>
+	  <List>
+          <ListItem button  onClick={() =>  history.push("/chat")}>
+            <ListItemIcon><ListIcon/></ListItemIcon>
+            <ListItemText primary={"Chat"} />
+          </ListItem>
+      </List>
+	   <List>
+          <ListItem button  onClick={() =>  history.push("/registro")}>
+            <ListItemIcon><ListIcon/></ListItemIcon>
+            <ListItemText primary={"Registro"} />
+          </ListItem>
+      </List>
       <List>
         {['Logout'].map((text, index) => (
          <ListItem button key={text} onClick={() =>  history.push("/")}>
@@ -132,9 +145,9 @@ function ResponsiveDrawer(props) {
  
   const container = window !== undefined ? () => window().document.body : undefined;
 
-  const notificaciones=localStorage.getItem("items") === null ? ([]):filter(JSON.parse(localStorage.getItem("items")));
   
   const res = true;
+
 
 
 
@@ -189,11 +202,7 @@ function ResponsiveDrawer(props) {
       </nav>
 	  <main className={classes.content}>
 		  <div className={classes.toolbar} />
-			<CardTask task={notificaciones} /> 
-			<Fab color="primary" aria-label="add" href="/newtask" style={{position: "fixed",bottom: "30px",right: "30px" }}>
-			<AddIcon />
-			</Fab>	
-			<FilterTask/>
+			   {props.childComponent}
 	  </main>	
 	
     </div>

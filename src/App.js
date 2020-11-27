@@ -3,6 +3,8 @@ import {Home} from './components/Home'
 import {NewTask} from './components/NewTask';
 import {UserProfile} from './components/UserProfile';
 import {Login} from './components/Login';
+import {Chat} from './components/Chat';
+import {RegistroTempo} from './components/RegistroTempo';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
@@ -14,11 +16,6 @@ class App extends Component {
 		this.state = {isLoggedIn: false};
 		console.log('por qqqqqqqqqqqqqqqqqqqqq'+this.state.isLoggedIn);
 		this.handleState = this.handleState.bind(this);
-		if(!localStorage.getItem("user") && !localStorage.getItem("name"), !localStorage.getItem("password")){
-			localStorage.setItem("user", "admin@hotmail.com");
-			localStorage.setItem("name", "Administrator");
-			localStorage.setItem("password", "admin");
-		}
 		
 	}
 	render(){
@@ -26,6 +23,8 @@ class App extends Component {
 		const newtask = () => <NewTask />;
 		const userprofile = () => <UserProfile />;
 		const login = () => < Login logged={this.handleState} />;
+		const chat = () => < Chat />;
+		const registro = () => < RegistroTempo />;
 		console.log('entro a render');
 		console.log(this.state.isLoggedIn);
 		if (this.state.isLoggedIn) {
@@ -47,7 +46,9 @@ class App extends Component {
 					<Route exact path="/" component={login} /> 
 					<Route exact path="/newtask" component={newtask} />  
 					<Route exact path="/home" component={home} />
-					<Route exact path="/userprofile" component={userprofile} />						
+					<Route exact path="/userprofile" component={userprofile} />	
+					<Route exact path="/chat" component={chat} />
+					<Route exact path="/registro" component={registro} />						
 					
 				  </div>
 				</Router>
